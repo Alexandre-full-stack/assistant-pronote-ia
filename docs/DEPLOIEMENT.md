@@ -44,7 +44,7 @@ git commit -m "Initial commit: Assistant Pronote IA complet"
 
 # Créer le repo sur GitHub (via interface web)
 # Puis lier le repo local
-git remote add origin https://github.com/VOTRE_USERNAME/assistant-pronote-ia.git
+git remote add origin https://github.com/Alexandre-full-stack/assistant-pronote-ia.git
 git branch -M main
 git push -u origin main
 ```

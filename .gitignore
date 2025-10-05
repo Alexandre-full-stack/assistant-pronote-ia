@@ -1,0 +1,91 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environment
+venv/
+ENV/
+env/
+.venv
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+backend/.env
+backend/.env.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Logs
+*.log
+logs/
+backend/logs/
+
+# Redis
+*.rdb
+dump.rdb
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.hypothesis/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Docker
+*.pid
+*.seed
+*.pid.lock
+
+# Selenium
+chromedriver
+geckodriver
+*.crx
+
+# Secrets & API Keys
+secrets/
+credentials/
+*.pem
+*.key
+*.crt
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Claude Code
+.claude/
