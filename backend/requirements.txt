@@ -1,0 +1,52 @@
+# Backend Python pour Assistant Pronote IA
+# Support CAS via monlycee.net avec pronotepy
+
+# Framework web
+fastapi==0.109.0
+uvicorn[standard]==0.27.0
+python-multipart==0.0.6
+
+# Pronote avec support CAS
+pronotepy==2.12.0
+
+# Sécurité et authentification
+pyjwt==2.8.0
+cryptography==42.0.0
+passlib==1.7.4
+bcrypt==4.1.2
+
+# Gestion sessions et cache
+redis==5.0.1
+python-redis-lock==4.0.0
+
+# HTTP et web scraping (pour CAS)
+httpx==0.26.0
+beautifulsoup4==4.12.3
+lxml==5.1.0
+
+# Selenium pour authentification CAS complexe
+selenium==4.17.0
+webdriver-manager==4.0.1
+
+# Variables d'environnement
+python-dotenv==1.0.0
+
+# CORS
+fastapi-cors==0.0.6
+
+# Validation de données
+pydantic==2.5.3
+pydantic-settings==2.1.0
+
+# Logs et monitoring
+loguru==0.7.2
+
+# Rate limiting
+slowapi==0.1.9
+
+# Timezone
+python-dateutil==2.8.2
+pytz==2024.1
+
+# Utilitaires
+aiofiles==23.2.1

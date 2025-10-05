@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Assistant IA personnel pour Pronote - Gérez vos devoirs, emploi du temps et notes avec l'intelligence artificielle">
+    <title>Assistant Pronote IA - Connexion</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <!-- Disclaimer légal -->
+    <div id="legal-disclaimer" class="disclaimer">
+        <div class="disclaimer-content">
+            <h3>Avertissement Important</h3>
+            <p><strong>Cette application est un projet éducatif non officiel.</strong></p>
+            <ul>
+                <li>Non affiliée à Index-Education (Pronote)</li>
+                <li>Utilise des bibliothèques tierces (pronotepy)</li>
+                <li>Vos identifiants ne sont utilisés que pour accéder à VOS données</li>
+                <li>Usage personnel et éducatif uniquement</li>
+                <li>Respect des CGU de Pronote requis</li>
+            </ul>
+            <p><strong>Sécurité :</strong> Vos identifiants sont chiffrés côté serveur. Aucune donnée n'est partagée avec des tiers.</p>
+            <button id="accept-disclaimer" class="btn btn-primary">J'ai compris</button>
+        </div>
+    </div>
+
+    <!-- Container principal -->
+    <div class="container" id="app-container" style="display: none;">
+        
+        <!-- Écran de connexion -->
+        <div id="login-screen" class="screen active">
+            <div class="card">
+                <div class="card-header">
+                    <h1>Assistant Pronote IA</h1>
+                    <p class="subtitle">Connectez-vous pour accéder à votre assistant personnel</p>
+                </div>
+                
+                <div class="card-body">
+                    <!-- Choix du type d'authentification -->
+                    <div class="auth-type-selector">
+                        <button id="btn-auth-direct" class="auth-type-btn active" data-auth="direct">
+                            Connexion Directe
+                        </button>
+                        <button id="btn-auth-cas" class="auth-type-btn" data-auth="cas">
+                            Connexion ENT/CAS
+                        </button>
+                    </div>
+
+                    <!-- Formulaire connexion directe -->
+                    <form id="login-form-direct" class="login-form active">
+                        <div class="form-group">
+                            <label for="pronote-url-direct">URL Pronote</label>
+                            <input 
+                                type="url" 
+                                id="pronote-url-direct" 
+                                class="form-control"
+                                placeholder="https://0123456X.index-education.net/pronote/eleve.html"
+                                required
+                            >
+                            <small class="form-hint">L'URL complète de votre Pronote</small>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="username-direct">Identifiant</label>
+                            <input 
+                                type="text" 
+                                id="username-direct" 
+                                class="form-control"
+                                autocomplete="username"
+                                required
+                            >
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="password-direct">Mot de passe</label>
+                            <input 
+                                type="password" 
+                                id="password-direct" 
+                                class="form-control"
+                                autocomplete="current-password"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="account-type">Type de compte</label>
+                            <select id="account-type" class="form-control">
+                                <option value="3" selected>Élève</option>
+                                <option value="2">Parent</option>
+                                <option value="1">Professeur</option>
+                            </select>
+                        </div>
+                        
+                        <button type="submit" id="login-btn-direct" class="btn btn-primary btn-block">
+                            Se connecter
+                        </button>
+                    </form>
+
+                    <!-- Formulaire connexion CAS -->
+                    <form id="login-form-cas" class="login-form">
+                        <div class="form-group">
+                            <label for="pronote-url-cas">URL Pronote</label>
+                            <input 
+                                type="url" 
+                                id="pronote-url-cas" 
+                                class="form-control"
+                                placeholder="https://0123456X.index-education.net/pronote/eleve.html"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="ent-selector">ENT / Région</label>
+                            <select id="ent-selector" class="form-control" required>
+                                <option value="">Sélectionnez votre ENT</option>
+                                <!-- Rempli dynamiquement par JavaScript -->
+                            </select>
+                            <small class="form-hint">Choisissez votre ENT régional (monlycee.net, etc.)</small>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="username-cas">Identifiant ENT</label>
+                            <input 
+                                type="text" 
+                                id="username-cas" 
+                                class="form-control"
+                                autocomplete="username"
+                                required
+                            >
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="password-cas">Mot de passe ENT</label>
+                            <input 
+                                type="password" 
+                                id="password-cas" 
+                                class="form-control"
+                                autocomplete="current-password"
+                                required
+                            >
+                        </div>
+                        
+                        <button type="submit" id="login-btn-cas" class="btn btn-primary btn-block">
+                            Se connecter via CAS
+                        </button>
+                    </form>
+
+                    <!-- Messages d'erreur -->
+                    <div id="login-error" class="error-message"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dashboard principal -->
+        <div id="dashboard-screen" class="screen">
+            <div class="dashboard">
+                <!-- Header -->
+                <header class="dashboard-header">
+                    <div class="user-info">
+                        <h2 id="student-name">Chargement...</h2>
+                        <p id="student-class">Classe</p>
+                    </div>
+                    <button id="logout-btn" class="btn btn-secondary">Déconnexion</button>
+                </header>
+
+                <!-- Navigation -->
+                <nav class="dashboard-nav">
+                    <button class="nav-btn active" data-tab="chat">
+                        <span class="icon">💬</span>
+                        Assistant IA
+                    </button>
+                    <button class="nav-btn" data-tab="homework">
+                        <span class="icon">📚</span>
+                        Devoirs
+                    </button>
+                    <button class="nav-btn" data-tab="timetable">
+                        <span class="icon">📅</span>
+                        Emploi du temps
+                    </button>
+                    <button class="nav-btn" data-tab="grades">
+                        <span class="icon">📊</span>
+                        Notes
+                    </button>
+                </nav>
+
+                <!-- Contenu des onglets -->
+                <main class="dashboard-content">
+                    
+                    <!-- Onglet Chat IA -->
+                    <div id="tab-chat" class="tab-content active">
+                        <div class="chat-container">
+                            <div id="chat-messages" class="chat-messages">
+                                <div class="message assistant">
+                                    <div class="message-content">
+                                        Bonjour ! Je suis votre assistant IA personnel. Posez-moi des questions sur vos devoirs, votre emploi du temps ou vos notes.
+                                    </div>
+                                    <div class="message-time"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="chat-input-container">
+                                <input 
+                                    type="text" 
+                                    id="chat-input" 
+                                    class="form-control"
+                                    placeholder="Posez votre question..."
+                                    autocomplete="off"
+                                >
+                                <button id="send-btn" class="btn btn-primary">Envoyer</button>
+                            </div>
+                            
+                            <div class="chat-suggestions">
+                                <button class="suggestion-btn" data-question="Quels sont mes devoirs pour demain ?">
+                                    Devoirs de demain
+                                </button>
+                                <button class="suggestion-btn" data-question="Mon emploi du temps de cette semaine">
+                                    Emploi du temps
+                                </button>
+                                <button class="suggestion-btn" data-question="Quelles sont mes dernières notes ?">
+                                    Mes notes
+                                </button>
+                                <button class="suggestion-btn" data-question="Résumé de ma semaine">
+                                    Résumé
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Onglet Devoirs -->
+                    <div id="tab-homework" class="tab-content">
+                        <div class="content-header">
+                            <h3>Mes devoirs</h3>
+                            <button id="refresh-homework" class="btn btn-secondary btn-sm">Actualiser</button>
+                        </div>
+                        <div id="homework-list" class="data-list">
+                            <div class="loading">Chargement des devoirs...</div>
+                        </div>
+                    </div>
+
+                    <!-- Onglet Emploi du temps -->
+                    <div id="tab-timetable" class="tab-content">
+                        <div class="content-header">
+                            <h3>Emploi du temps</h3>
+                            <button id="refresh-timetable" class="btn btn-secondary btn-sm">Actualiser</button>
+                        </div>
+                        <div id="timetable-list" class="data-list">
+                            <div class="loading">Chargement de l'emploi du temps...</div>
+                        </div>
+                    </div>
+
+                    <!-- Onglet Notes -->
+                    <div id="tab-grades" class="tab-content">
+                        <div class="content-header">
+                            <h3>Mes notes</h3>
+                            <button id="refresh-grades" class="btn btn-secondary btn-sm">Actualiser</button>
+                        </div>
+                        <div id="grades-list" class="data-list">
+                            <div class="loading">Chargement des notes...</div>
+                        </div>
+                    </div>
+
+                </main>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Loading overlay -->
+    <div id="loading-overlay" class="loading-overlay">
+        <div class="loading-spinner"></div>
+        <p id="loading-text">Connexion en cours...</p>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/config.js"></script>
+    <script src="js/api-client.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/chat.js"></script>
+    <script src="js/pronote-data.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
